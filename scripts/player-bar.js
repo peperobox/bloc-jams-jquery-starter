@@ -1,7 +1,7 @@
 {
   $('button#play-pause').on('click', function() {
     player.playPause();
-    $('button#play-pause').attr('playState', player.playState);
+    $(this).attr('playState', player.playState);
   });
 
   $('button#next').on('click', function() {
@@ -28,7 +28,7 @@
     const currentTime = player.getTime();
     const duration = player.getDuration();
     const percent = (currentTime/duration)*100;
-    $('time-control .current-time').text(currentTime);
+    $('#time-control .current-time').text(currentTime);
     $('#time-control input').val(percent);
   }, 1000);
 
@@ -37,7 +37,7 @@
 
     const currentSongIndex = album.songs.indexOf(player.currentlyPlaying);
     const previousSongIndex = currentSongIndex - 1;
-    if (previousSongIndex === 0) { return; }
+    if (previousSongIndex < 0) { return; }
 
     const previousSong = album.songs[previousSongIndex];
     helper.playPauseAndUpdate(previousSong);
